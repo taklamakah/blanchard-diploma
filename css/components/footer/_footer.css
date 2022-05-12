@@ -1,0 +1,89 @@
+.footer {
+  height: 140px;
+  background-color: black;
+}
+
+.footer__logo {
+  outline: none;
+    margin-top: 6px;
+}
+
+.footer__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 100%;
+}
+
+.footer__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.footer__item {
+  -webkit-transition-property: -webkit-transform;
+  transition-property: -webkit-transform;
+  -o-transition-property: transform;
+  transition-property: transform;
+  transition-property: transform, -webkit-transform;
+  -webkit-transition-duration: 0.4s;
+  -o-transition-duration: 0.4s;
+  transition-duration: 0.4s;
+  -webkit-transition-timing-function: ease-in-out;
+  -o-transition-timing-function: ease-in-out;
+  transition-timing-function: ease-in-out;
+  outline: none;
+  border: none;
+}
+
+.footer__social {
+  outline: none;
+}
+
+.footer__item .footer__icon {
+  fill: #cacaca;
+  -webkit-transition: fill 0.2s ease-in-out;
+  -o-transition: fill 0.2s ease-in-out;
+  transition: fill 0.2s ease-in-out;
+}
+
+.footer__item a:focus .footer__icon {
+  fill: #ffffff;
+}
+
+.footer__item a:hover .footer__icon {
+  fill: #ffffff;
+}
+
+.footer__item a:active .footer__icon {
+  fill: #9d5cd0;
+}
+
+.footer__item:not(:last-child) {
+  margin-right: 21px;
+}
+
+.footer__social svg > path {
+  -webkit-transition: fill 0.4s ease;
+  -o-transition: fill 0.4s ease;
+  transition: fill 0.4s ease;
+}
+
+.footer__social:focus path {
+  fill: white;
+  outline: none;
+}
+
+.footer__item:hover path {
+  fill: #9d5cd0;
+}

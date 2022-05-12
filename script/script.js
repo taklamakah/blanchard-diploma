@@ -27,88 +27,101 @@ document.addEventListener('DOMContentLoaded', function() {
 			shouldSort: false
 		});
 	})
-	// GALLERY SWIPER
-var swiper = new Swiper('.section-gallery__slider-container', {
-	pagination: {
-		el: '#gallery__pagination',
-		type: 'fraction',
-		clickable: true,
-		observer: true,
-		resizeObserver: true,
-		centeredSlides: true,
-	},
-	// Navigation arrows
-	navigation: {
-		nextEl: '.swiper-button-next',
-		prevEl: '.swiper-button-prev',
-	},
-	keyboard: {
-		enabled: true,
-		onlyInViewport: true
-	},
-	a11y: {
-		prevSlideMessage: 'Предыдущий',
-		nextSlideMessage: 'Следующий слайд',
-		firstSlideMessage: 'Это первый слайд',
-		lastSlideMessage: 'Это последний слайд'
-	},
-	breakpoints: {
-		280: {
-			slidesPerView: 1,
-			spaceBetween: 10,
-			grid: {
-				rows: 1,
-			},
-		},
-		480: {
-			slidesPerView: 1,
-			spaceBetween: 10,
-			grid: {
-				rows: 1,
-			},
-		},
-		481: {
-			slidesPerView: 1,
-			spaceBetween: 34,
-			slidesPerGroup: 1,
-			grid: {
-				rows: 2,
-			},
-		},
-		768: {
-			slidesPerView: 2,
-			spaceBetween: 34,
-			slidesPerGroup: 2,
-			grid: {
-				rows: 2,
-			},
-		},
-		992: {
-			slidesPerView: 2,
-			spaceBetween: 34,
-			slidesPerGroup: 2,
-			grid: {
-				rows: 2,
-			},
-		},
-		1200: {
-			slidesPerView: 2,
-			spaceBetween: 50,
-			slidesPerGroup: 2,
-			grid: {
-				rows: 2,
-			},
-		},
-		1640: {
-			slidesPerView: 3,
-			spaceBetween: 50,
-			slidesPerGroup: 3,
-			grid: {
-				rows: 2,
-			},
-		}
-	}
+
+
+let gallerySlider = new Swiper(".section-gallery__slider-container", {
+  slidesPerView: 1,
+  grid: {
+    rows: 1,
+    fill: "row"
+  },
+  spaceBetween: 20,
+  pagination: {
+    el: "#gallery__pagination",
+    type: "fraction"
+  },
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev"
+  },
+
+  // 	pagination: {
+// 		el: '#gallery__pagination',
+// 		type: 'fraction',
+// 		clickable: true,
+// 		observer: true,
+// 		resizeObserver: true,
+// 		centeredSlides: true,
+// 	},
+// 	// Navigation arrows
+// 	navigation: {
+// 		nextEl: '.swiper-button-next',
+// 		prevEl: '.swiper-button-prev',
+// 	},
+// 	keyboard: {
+// 		enabled: true,
+// 		onlyInViewport: true
+// 	},
+
+  breakpoints: {
+    441: {
+      slidesPerView: 2,
+      grid: {
+        rows: 2
+      },
+      spaceBetween: 30
+    },
+
+    1200: {
+      slidesPerView: 3,
+      grid: {
+        rows: 2
+      },
+      spaceBetween: 50
+    }
+  },
+
+  a11y: false,
+  keyboard: true, // можно управлять с клавиатуры стрелками влево/вправо
+
+  // Дальнейшие надстройки делают слайды вне области видимости не фокусируемыми
+  watchSlidesProgress: true,
+  watchSlidesVisibility: true,
+  slideVisibleClass: 'slide-visible',
+
+  on: {
+    init: function () {
+      this.slides.forEach(slide => {
+        if (!slide.classList.contains('slide-visible')) {
+          slide.tabIndex = '-1';
+        } else {
+          slide.tabIndex = '';
+        }
+      });
+    },
+    slideChange: function () {
+      this.slides.forEach(slide => {
+        if (!slide.classList.contains('slide-visible')) {
+          slide.tabIndex = '-1';
+        } else {
+          slide.tabIndex = '';
+        }
+      });
+    }
+  }
+
+  // on: {
+  //   /* исправляет баг с margin-top остающимся при смене брейкпоинта, это было нужно в 6-й версии свайпера */
+  //   beforeResize: function () {
+  //     this.slides.forEach((el) => {
+  //       el.style.marginTop = "";
+  //     });
+  //   }
+  // }
 });
+
+
+
 // Тултип
 tippy('#marker1', {
 	theme: 'custom',
@@ -125,7 +138,7 @@ tippy('#marker3', {
 	duration: [600, 600],
 	maxWidth: 270,
 });
-// tabs 
+// tabs
 $(function() {
 	$(".tabs__accordion").accordion({
 		collapsible: true,
@@ -195,23 +208,24 @@ for(let element of linksToAcc) {
 	})
 }
 /*HIDDEN BUTTON EVENTS*/
-let button = document.querySelector('.section-event__btn');
-button.addEventListener('click', function() {
-	document.querySelectorAll('.hidden').forEach(function(hiddenCard) {
-		hiddenCard.classList.remove('hidden')
-	})
-	this.classList.add('hidden')
-});
-const mediaQuery = window.matchMedia('(max-width: 991px)');
+// let button = document.querySelector('.section-event__btn');
+// button.addEventListener('click', function() {
+// 	document.querySelectorAll('.hidden').forEach(function(hiddenCard) {
+// 		hiddenCard.classList.remove('hidden')
+// 	})
+// 	this.classList.add('hidden')
+// });
+// const mediaQuery = window.matchMedia('(max-width: 991px)');
 
-function handleTabletChange(e) {
-	if(e.matches) {
-		document.querySelector('.event-card3').classList.add('hidden');
-		document.querySelector('.event-card3').classList.add('fadeInUp');
-	}
-}
-mediaQuery.addListener(handleTabletChange);
-handleTabletChange(mediaQuery);
+// function handleTabletChange(e) {
+// 	if(e.matches) {
+// 		document.querySelector('.event-card3').classList.add('hidden');
+// 		document.querySelector('.event-card3').classList.add('fadeInUp');
+// 	}
+// }
+// mediaQuery.addListener(handleTabletChange);
+// handleTabletChange(mediaQuery);
+
 /*SLIDER PUBLICATION*/
 var swiper2 = new Swiper('.swiper-publications', {
 	navigation: {
@@ -239,11 +253,11 @@ var swiper2 = new Swiper('.swiper-publications', {
 		// 	slidesPerGroup: 3,
 		// 	spaceBetween: 10
 		// },
-		481: {
-			slidesPerView: 2,
-			slidesPerGroup: 3,
-			spaceBetween: 30
-		},
+		// 481: {
+		// 	slidesPerView: 2,
+		// 	slidesPerGroup: 3,
+		// 	spaceBetween: 30
+		// },
 		768: {
 			slidesPerView: 2,
 			slidesPerGroup: 2,
@@ -261,7 +275,8 @@ var swiper2 = new Swiper('.swiper-publications', {
 		}
 	}
 });
-const mediaQueryPublications320 = window.matchMedia('(max-width: 481px)');
+
+const mediaQueryPublications320 = window.matchMedia('(max-width: 600px)');
 
 function handleTabletChangePublications320(e) {
 	if(e.matches) {
@@ -297,7 +312,7 @@ var swiper3 = new Swiper('.slider-projects__swiper-container', {
 			spaceBetween: 0,
 		},
 		485: {
-			slidesPerView: 2,
+			slidesPerView: 1,
 			spaceBetween: 34
 		},
 		768: {
@@ -327,7 +342,7 @@ let swiperSectionHero = new Swiper('.section-hero.swiper-container', {
 	speed: 3000,
 	spaceBetween: 30,
 });
-const mediaQuery480 = window.matchMedia('(max-width: 480px)');
+const mediaQuery480 = window.matchMedia('(max-width: 600px)');
 
 function handleTabletChange480(e) {
 	if(e.matches) {
@@ -335,22 +350,6 @@ function handleTabletChange480(e) {
 		document.querySelectorAll('.section-event__item').forEach(function(AllCard) {
 			AllCard.classList.add('swiper-slide');
 		})
-		$(function() {
-			$(".section-publications__checkbox").accordion({
-				active: false,
-				collapsible: true,
-				heightStyle: 'content'
-			});
-		});
-		const accButton = document.querySelectorAll('button.accordion__btn');
-		for(let button of accButton) {
-			button.addEventListener('click', function() {
-				document.querySelector('.tabs__painter-desc-active').scrollIntoView({
-					behavior: 'smooth',
-					block: 'start'
-				});
-			});
-		}
 	}
 }
 mediaQuery480.addListener(handleTabletChange480);
@@ -452,71 +451,8 @@ $('#burger__close').click(function() {
 	}, 300);
 });
 const mediaQueryMax991 = window.matchMedia('(max-width: 991px)');
-
-function handleTabletChange991(e) {
-	if(e.matches) {
-		document.querySelector('#header__btn-seach').addEventListener('click', function(e) {
-			e.preventDefault();
-			this.classList.add('is-active');
-			this.classList.add('fadeInLeft');
-			document.querySelector('.header__logo').classList.add('hidden');
-			document.querySelector('#burger').classList.add('hidden');
-			document.querySelector('#input__search').classList.add('is-active');
-			document.querySelector('#input__search').classList.add('fadeInLeft');
-			document.querySelector('#burger__search-close').classList.add('is-active');
-			document.querySelector('#burger__search-close').classList.add('fadeInLeft');
-		});
-		document.querySelector('#burger__search-close').addEventListener('click', function(e) {
-			e.preventDefault();
-			this.classList.remove('is-active');
-			this.classList.remove('fadeInLeft');
-			document.querySelector('.header__logo').classList.remove('hidden');
-			document.querySelector('.header__logo').classList.remove('move');
-			document.querySelector('#burger').classList.remove('hidden');
-			document.querySelector('#input__search').classList.remove('is-active');
-			document.querySelector('#input__search').classList.remove('fadeInLeft');
-			document.querySelector('#header__btn-seach').classList.remove('is-active');
-			document.querySelector('#header__btn-seach').classList.remove('fadeInLeft');
-		})
-	}
-}
-mediaQueryMax991.addListener(handleTabletChange991);
-handleTabletChange991(mediaQueryMax991);
-const mediaQueryMax480 = window.matchMedia('(max-width: 480px)');
-
-function handleTabletChangeMax480(e) {
-	if(e.matches) {
-		document.querySelector('#header__btn-seach').addEventListener('click', function(e) {
-			document.querySelector('.section-hero').style.height = "355px";
-			document.querySelector('.section-hero__content').style.top = "78px";
-		});
-		document.querySelector('#burger__search-close').addEventListener('click', function(e) {
-			e.preventDefault();
-			document.querySelector('.section-hero').style.height = "310px";
-			document.querySelector('.section-hero__content').style.top = "33px";
-		});
-	}
-}
-mediaQueryMax480.addListener(handleTabletChangeMax480);
-handleTabletChangeMax480(mediaQueryMax480);
-const mediaQueryMax1199 = window.matchMedia('(max-width: 1199px)');
-
-function handleTabletChange1199(e) {
-	if(e.matches) {
-		document.querySelector('#header__btn-seach').addEventListener('click', function(e) {
-			e.preventDefault();
-			this.classList.add('is-active');
-			this.classList.add('fadeInLeft');
-			document.querySelector('#input__search').classList.add('is-active');
-			document.querySelector('#input__search').classList.add('fadeInLeft');
-			document.querySelector('.header__logo').classList.add('move');
-		})
-	}
-}
-mediaQueryMax1199.addListener(handleTabletChange1199);
-handleTabletChange1199(mediaQueryMax1199);
 /*MODAL*/
-const cardGallery = document.querySelectorAll('.slider-gallery__item');
+const cardGallery = document.querySelectorAll('.section-gallery__swiper-slide');
 for(let card of cardGallery) {
 	card.addEventListener('click', function() {
 		const popup = document.querySelector('.popup');
@@ -541,6 +477,18 @@ document.querySelector('#popup__close').addEventListener('click', function() {
 	document.querySelector('.popup').classList.remove('popup__is-active');
 	$("body").css("overflow", "auto");
 });
+
+document.querySelector('.popup').addEventListener('click', function() {
+	document.querySelector('.popup').classList.remove('popup__is-active');
+  $("body").css("overflow", "auto");
+});
+
+const popupScroll = new SimpleBar(document.getElementById('popup__scroll'), {
+	autoHide: false,
+	scrollbarMaxSize: 20
+});
+// popupScroll.recalculate();
+
 //Переход к футеру
 let btn = document.querySelector('.btn-to-footer')
 btn.addEventListener('click', function() {
@@ -563,7 +511,7 @@ btn.addEventListener('click', function() {
 //       $('.content').highlight(term);
 //       n = $("p.highlight").length;
 //       if (n == 0) {
-//         $("p.results").fadeIn().append("Ничего такого в тексте нет");  
+//         $("p.results").fadeIn().append("Ничего такого в тексте нет");
 //       } else {
 //         $("p.results").fadeIn().append('Найдено совпадений:' + n);
 //       }
@@ -571,9 +519,10 @@ btn.addEventListener('click', function() {
 //     }
 //   });
 // });
+
 /*FORM VALIDATE*/
 $(document).ready(function() {
-	$("#phone").mask("+7 (999) 99-99-999");
+	$("#phone").mask("+7 (999) 999-99-99");
 });
 let validator = new JustValidate('.form__wrap', {
 	colorWrong: '#D11616',
@@ -594,6 +543,7 @@ let validator = new JustValidate('.form__wrap', {
 		tel: 'Недопустимый формат'
 	}
 });
+
 /*YANDEX MAP*/
 document.addEventListener('DOMContentLoaded', () => {
 	// lazyload для яндекс-карты
@@ -672,3 +622,88 @@ document.addEventListener('DOMContentLoaded', () => {
 		myMap.geoObjects.add(myPlacemark);
 	}
 });
+
+
+
+
+
+let eventSlider = new Swiper(".section-event__wrapper", {
+  slidesPerView: 1,
+  grid: {
+    rows: 1,
+    fill: "row"
+  },
+  spaceBetween: 20,
+  pagination: {
+    el: ".section-event__swiper-pagination",
+		clickable: true
+  },
+  navigation: {
+    nextEl: ".section-event__btn-prev",
+    prevEl: ".section-event__btn-next",
+    disabledClass: "section-event__btn-disabled"
+  },
+
+
+  breakpoints: {
+    611: {
+      slidesPerView: 1,
+      slidesPerGroup: 1,
+      spaceBetween: 34
+    },
+
+    971: {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+      spaceBetween: 27
+    },
+
+    1281: {
+      slidesPerView: 3,
+      slidesPerGroup: 3,
+      spaceBetween: 50
+    }
+  },
+
+  a11y: false,
+  keyboard: true, // можно управлять с клавиатуры стрелками влево/вправо
+
+  // Дальнейшие надстройки делают слайды вне области видимости не фокусируемыми
+  watchSlidesProgress: true,
+  watchSlidesVisibility: true,
+  slideVisibleClass: 'slide-visible',
+
+  on: {
+    init: function () {
+      this.slides.forEach(slide => {
+        if (!slide.classList.contains('slide-visible')) {
+          slide.tabIndex = '-1';
+        } else {
+          slide.tabIndex = '';
+        }
+      });
+    },
+    slideChange: function () {
+      this.slides.forEach(slide => {
+        if (!slide.classList.contains('slide-visible')) {
+          slide.tabIndex = '-1';
+        } else {
+          slide.tabIndex = '';
+        }
+      });
+    }
+  }
+});
+
+
+
+
+
+
+(() => {
+  const checkBtn = document.querySelector('.js-check-heading');
+
+  checkBtn.addEventListener('click', function () {
+      this.classList.toggle('is-active');
+  });
+})();
