@@ -1053,10 +1053,10 @@ input.header__search:focus:focus:-ms-input-placeholder {
   position: absolute;
   content: "";
   padding: 3px;
-  width: 100%;
-  height: 100%;
-  left: -5px;
-  top: -5px;
+  width: 105%;
+  height: 118%;
+  left: -8px;
+  top: -6px;
   border-radius: 100px;
   border: 2px solid var(--color-violet-link-hover);
 }
@@ -3489,10 +3489,10 @@ input.header__search:focus:focus:-ms-input-placeholder {
 .form__btn-expand:focus::after {
   content: "";
   position: absolute;
-  top: -6px;
-  left: -6px;
-  width: 100%;
-  height: 100%;
+  top: -5px;
+  left: -5px;
+  width: 107%;
+  height: 118%;
   border: 2px solid var(--color-violet-link-hover);
   padding: 4px 4px 4px 4px;
   border-radius: 36px;

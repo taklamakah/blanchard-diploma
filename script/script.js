@@ -541,7 +541,26 @@ let validator = new JustValidate('.form__wrap', {
 	messages: {
 		name: 'Недопустимый формат',
 		tel: 'Недопустимый формат'
-	}
+	},
+  // //phpmailer
+  submitHandler: function(thisForm) {
+    let formData = new FormData(thisForm);
+
+    let xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          console.log('Отправлено');
+        }
+      }
+    }
+
+    xhr.open('POST', 'mail.php', true);
+    xhr.send(formData);
+
+    thisForm.reset();
+  }
 });
 
 /*YANDEX MAP*/
@@ -707,3 +726,6 @@ let eventSlider = new Swiper(".section-event__wrapper", {
       this.classList.toggle('is-active');
   });
 })();
+
+
+
